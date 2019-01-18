@@ -14,11 +14,12 @@ var io = socketIO(server);
 io.on('connection', (socket) => {
     console.log('New user connected');
     
-    socket.emit('userWelcome',generateMessage('Admin','Welcome to the Chat app'));
-    socket.broadcast.emit('userJoined',generateMessage('Admin','New user joined the channel'));
+    socket.emit('newMessage',generateMessage('Admin','Welcome to the Chat app'));
+    socket.broadcast.emit('newMessage',generateMessage('Admin','New user joined the channel'));
 
-    socket.on('createMessage', (newMessage)=>{
+    socket.on('createMessage', (newMessage, callback)=>{
         io.emit('newMessage', generateMessage(newMessage.from,newMessage.text));
+        callback('This is from server');
     });
 
     socket.on('disconnect', () => {
