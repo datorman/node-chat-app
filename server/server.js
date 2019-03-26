@@ -25,6 +25,7 @@ io.on('connection', (socket) => {
         if(!isRealString(params.name) || !isRealString(params.room)){
             return callback('Name and Room name are required.');
         }
+        // Once joined we need to store that user has joined the room.
         socket.join(params.room);
         users.removeUser(socket.id);
         users.addUser(socket.id,params.name,params.room);
@@ -61,6 +62,19 @@ io.on('connection', (socket) => {
 });
 
 app.use(express.static(publicPath));
+
+// APP POST needed here for creation of rooms
+// On submit create room if room does not already exist.
+
+// APP GET needed for getting a list of all rooms to prefill dropdown for user.
+
+
+// APP POST needed here for registration
+// On submit check if user exists and if not then create new user and return user + auth token.
+
+
+// APP POST needed here for sign in
+// If valid credentials then return auth token + user info
 
 
 server.listen(port, () => {
