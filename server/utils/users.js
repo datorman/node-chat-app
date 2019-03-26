@@ -1,3 +1,4 @@
+//Need to update this so that the users utils functions uses the model which will be created
 class Users {
     constructor (){
         this.users = [];
