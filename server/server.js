@@ -3,6 +3,9 @@ const http = require('http');
 const express = require('express');
 const socketIO = require('socket.io');
 
+// Need to add mongoose mongodb and create models for USERS ROOMS and MESSAGES
+// Need to get Mongodb localhost from file
+
 const{generateMessage,generateLocationMessage} = require('./utils/message');
 const {isRealString} = require('./utils/validation');
 const {Users} = require('./utils/users');
