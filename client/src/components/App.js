@@ -7,6 +7,8 @@ import Auth from './auth/Auth';
 import Chat from './chat/Chat';
 import PublicRoute from '../routes/PublicRoute';
 import PrivateRoute from '../routes/PrivateRoute';
+import Header from './Header';
+import Footer from './Footer';
 
 export const history = createBrowserHistory();
 
@@ -16,8 +18,8 @@ class App extends Component {
   }
   render() {
     return (
-      
       <div className="App">
+        <Header />
         <Router history={history}>
           <PublicRoute 
             exact={true}
@@ -29,6 +31,7 @@ class App extends Component {
             path="/chat" 
             component={Chat} />
         </Router>
+        <Footer />
       </div>
     );
   }
