@@ -15,7 +15,13 @@ const UserSchema = new Schema({
     },
     email:{
         type: String,
-        unique: true
+        unique: true,
+        trim:true,
+        required: true,
+        validate:{
+            validator: validator.isEmail,
+            message: '{VALUE} is not a valid email.'
+        }
     },
     tokens:[{
         access: {
