@@ -26,6 +26,8 @@ var io = socketIO(server);
 var users = new Users();
 
 require('./routes/RoomRoutes')(app);
+require('./routes/UserRoutes')(app);
+require('./routes/MessageRoutes')(app);
 
 
 io.on('connection', (socket) => {
