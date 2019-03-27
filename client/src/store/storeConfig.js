@@ -3,8 +3,6 @@ import thunk from 'redux-thunk';
 import authReducer from './../reducers/auth';
 import {loadState,saveState} from './localstore';
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
 const persistState = loadState();
 
 export default () => {

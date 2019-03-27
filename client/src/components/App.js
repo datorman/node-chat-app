@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import {Router, Route,Switch} from 'react-router-dom';
+import {Router, Route,Switch,Redirect} from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import {connect} from 'react-redux';
 
 import Auth from './auth/Auth';
 import Chat from './chat/Chat';
+import PublicRoute from '../routes/PublicRoute';
+import PrivateRoute from '../routes/PrivateRoute';
 
 export const history = createBrowserHistory();
 
@@ -13,13 +15,19 @@ class App extends Component {
     super(props);
   }
   render() {
-    console.log(this.props);
     return (
       
       <div className="App">
         <Router history={history}>
-          <Route exact path="/" component={Auth} />
-          <Route exact path="/chat" component={Chat} />
+          <PublicRoute 
+            exact={true}
+            path="/" 
+            component={Auth} 
+          />
+          <PrivateRoute 
+            exact={true} 
+            path="/chat" 
+            component={Chat} />
         </Router>
       </div>
     );

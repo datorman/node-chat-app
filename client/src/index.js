@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 import LoadingPage from './components/LoadingPage';
 import configureStore from './store/storeConfig';
-import auth from './auth/auth';
 
 let hasRendered = false;
 
