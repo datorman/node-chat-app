@@ -28,13 +28,11 @@ class Auth extends Component{
     }
     onVerifyPasswordChange = (e) => {
         const verifyPassword = e.target.value;
-        if(verifyPassword !== this.state.password){
-            this.setState(() => ({verifyPassword}));
-        } else {
-            this.setState(() => ({verifyPassword,error:true}));
-        }
+        this.setState(() => ({verifyPassword}));
+
     }
     onSubmit = (e) => {
+        console.log('submit',this.state);
         e.preventDefault();
         if(!this.state.error){
             axios.post('/api/users/create',{params:{

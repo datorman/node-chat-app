@@ -18,6 +18,14 @@ module.exports = (app) => {
                 res.status(400).send({'error':'user already exists'})
             }
         });
-
+    });
+    app.post('/api/users/login', (req,res) => {
+        User.findByCredentials(req.body.params.email,req.body.params.password).then((user) => {
+            return user.generateAuthToken().then((token) => {
+                res.header('x-auth',token).send({user}); 
+            });
+        }).catch((e) => {
+            res.status(400).send({'error':'No user found'});
+        });
     });
 };

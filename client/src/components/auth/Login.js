@@ -1,18 +1,19 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import axios from 'axios';
 
 class Auth extends Component{
     constructor(props){
         super(props);
         this.state = {
             isLoading:false,
-            username: '',
+            email: '',
             password: ''
         };
     };
     onUsernameChange = (e) => {
-        const username = e.target.value;
-        this.setState(() => ({username}));
+        const email = e.target.value;
+        this.setState(() => ({email}));
     };
     onPasswordChange = (e) => {
         const password = e.target.value;
@@ -20,7 +21,19 @@ class Auth extends Component{
     };
     onSubmit = (e) => {
         e.preventDefault(); 
-        this.props.history.push('/chat'); 
+        axios.post('/api/users/login',{
+            params:{
+                email:this.state.email,
+                password:this.state.password
+            }
+        }).then((res) => {
+            this.props.history.push('/chat'); 
+        },(err) => {
+            this.setState({
+                isLoading:false,
+                error: true 
+            })
+        }); 
     };
     render() {
         return(
@@ -28,7 +41,7 @@ class Auth extends Component{
                 <form  onSubmit = {this.onSubmit}>
                     <input 
                         type="text"
-                        placeholder="Email/Username"
+                        placeholder="Email"
                         autoFocus    
                         value = {this.state.username}
                         onChange = {this.onUsernameChange}
