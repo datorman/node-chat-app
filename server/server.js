@@ -11,8 +11,8 @@ const{generateMessage,generateLocationMessage} = require('./utils/message');
 const {isRealString} = require('./utils/validation');
 const {Users} = require('./utils/users');
 
-const publicPath = path.join(__dirname, '../public');
-const port = process.env.PORT || 3000;
+const publicPath = path.join(__dirname, '../client');
+const port = process.env.PORT || 5000;
 
 mongoose.connect(keys.mongoURI);
 

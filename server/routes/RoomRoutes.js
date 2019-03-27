@@ -1,4 +1,5 @@
 const {Room} = require('./../models/Room');
+
 module.exports = (app) => {
     app.post('/api/rooms/create', (req,res) => {
         Room.findOne({'name':req.body.name}).then((room) => {
