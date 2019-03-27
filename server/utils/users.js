@@ -1,4 +1,5 @@
-//Need to update this so that the users utils functions uses the model which will be created
+require('../models/User');
+
 class Users {
     constructor (){
         this.users = [];

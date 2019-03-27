@@ -5,22 +5,28 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const socketIO = require('socket.io');
 
-// Need to add mongoose mongodb and create models for USERS ROOMS and MESSAGES
-// Need to get Mongodb localhost from file
 
+const keys = require('./config/keys');
 const{generateMessage,generateLocationMessage} = require('./utils/message');
 const {isRealString} = require('./utils/validation');
 const {Users} = require('./utils/users');
 
 const publicPath = path.join(__dirname, '../public');
 const port = process.env.PORT || 3000;
+
+mongoose.connect(keys.mongoURI);
+
 require('./models/Room');
 
 var app = express();
+app.use(bodyParser.json());
 var server = http.createServer(app);
 var io = socketIO(server);
 
 var users = new Users();
+
+require('./routes/RoomRoutes')(app);
+
 
 io.on('connection', (socket) => {
     console.log('New user connected');
