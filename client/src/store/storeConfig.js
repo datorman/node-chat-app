@@ -1,6 +1,7 @@
 import {createStore,combineReducers, applyMiddleware, compose} from 'redux';
-import thunk from 'redux-thunk';
 import authReducer from './../reducers/auth';
+import roomReducer from './../reducers/room';
+import activeRoom from './../reducers/activeRoom';
 import {loadState,saveState} from './localstore';
 
 const persistState = loadState();
@@ -8,7 +9,9 @@ const persistState = loadState();
 export default () => {
     const store = createStore(
         combineReducers({
-            auth: authReducer
+            auth: authReducer,
+            rooms: roomReducer,
+            activeRoom:activeRoom
         }),
         persistState
     );

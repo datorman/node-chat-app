@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Router, Route,Switch,Redirect} from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import {connect} from 'react-redux';
+import io from "socket.io-client"
 
 import Auth from './auth/Auth';
 import Chat from './chat/Chat';
@@ -12,9 +13,27 @@ import Footer from './Footer';
 
 export const history = createBrowserHistory();
 
+let socket;
+
 class App extends Component {
   constructor(props){
     super(props);
+    socket='';
+  }
+  componentDidMount(){
+    if(this.props.auth && !socket){
+      socket = io.connect("http://localhost:5000");
+      socket.emit('createMessage', {
+        text: "hello"
+      }, function(data){
+        console.log('Error');
+      });
+    }
+  }
+  ccomponentWillUnmount(){
+    if(socket){
+      socket.disconnect();
+    }
   }
   render() {
     return (
@@ -38,6 +57,7 @@ class App extends Component {
 }
 const mapStateToProps = (state) => ({
     auth:state.auth.token,
-    user:state.auth.user
+    user:state.auth.user,
+    activeRoom: state.activeRoom
 });
 export default connect (mapStateToProps)(App);
