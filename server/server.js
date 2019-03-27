@@ -1,15 +1,20 @@
 const path = require('path');
 const http = require('http');
 const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 const socketIO = require('socket.io');
 
 const{generateMessage,generateLocationMessage} = require('./utils/message');
 const publicPath = path.join(__dirname, '../public');
 const port = process.env.PORT || 3000;
+require('./models/Room');
 
 var app = express();
 var server = http.createServer(app);
 var io = socketIO(server);
+
+
 
 io.on('connection', (socket) => {
     console.log('New user connected');
