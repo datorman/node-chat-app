@@ -17,6 +17,3 @@ ReactDOM.render(<LoadingPage />,document.getElementById('root'));
 
 //Once Set up is done we call render app for now its immidiate
 renderApp();
-
-
-

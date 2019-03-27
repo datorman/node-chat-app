@@ -12,15 +12,21 @@ class Auth extends Component{
         };
     }
     renderContent(){
+
         if(this.state.login){
-            return <Login />
+            return <Login history={this.props.history} onSubmit={this.onSubmit} toggleState={this.toggleLoginState}/>
         } else {
-            return <Register />
-        }
+            return <Register history={this.props.history} onSubmit={this.onSubmit} toggleState={this.toggleLoginState}/>
+        } 
+    }
+    toggleLoginState = (e)=>{
+        e.preventDefault();
+        this.setState({login:!this.state.login});
     }
     render() {
         return(
             <div>
+                <h2>Login/Register</h2>
                 {this.renderContent()}
             </div>
             )
