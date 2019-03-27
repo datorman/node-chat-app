@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 
-class Auth extends Component{
+class Register extends Component{
     constructor(props){
         super(props);
         this.state = {
@@ -89,4 +89,4 @@ class Auth extends Component{
             )
     }
 }
-export default Auth;
+export default Register;

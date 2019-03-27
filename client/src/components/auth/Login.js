@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
+import {startLogin} from './../../actions/auth';
+import {connect} from 'react-redux';
 
-class Auth extends Component{
+class Login extends Component{
     constructor(props){
         super(props);
         this.state = {
@@ -27,6 +29,7 @@ class Auth extends Component{
                 password:this.state.password
             }
         }).then((res) => {
+            this.props.startLogin(res);
             this.props.history.push('/chat'); 
         },(err) => {
             this.setState({
@@ -60,4 +63,8 @@ class Auth extends Component{
             )
     }
 }
-export default Auth;
+
+const mapDispatchToProps = (dispatch) => ({
+    startLogin: (res) => dispatch(startLogin(res))
+});
+export default connect(undefined,mapDispatchToProps)(Login);
