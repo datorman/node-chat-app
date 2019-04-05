@@ -28,4 +28,11 @@ module.exports = (app) => {
             res.status(400).send({'error':'No user found'});
         });
     });
+    app.post('/api/users/logout', (req,res) =>{
+        console.log('here');
+        console.log(req.headers);
+        User.findByToken(req.token).then((user) => {
+            console.log(user);
+        });
+    });
 };

@@ -6,7 +6,10 @@ export default (state = {}, action) =>{
                 user: action.user
             };
         case 'LOGOUT':
-            return{};
+            return{
+                token:'',
+                user:''
+            };
         default:
             return state;
     }

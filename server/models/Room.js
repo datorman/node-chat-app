@@ -10,6 +10,11 @@ const RoomSchema = new Schema({
         type: String,
         default: '',
         select: false
+    },
+    users:{
+        type: Schema.Types.ObjectId, ref: 'User',
+        required: true,
+        unique: true
     }
 });
 

@@ -6,6 +6,8 @@ export const startLogin = (res) =>({
         id: res.data.user._id
     }
 });
-export const logout = () =>({
-    type: 'LOGOUT'
+export const startLogout = () =>({
+    type: 'LOGOUT',
+    token:'',
+    user:{}
 });

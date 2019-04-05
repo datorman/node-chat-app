@@ -7,7 +7,7 @@ const socketIO = require('socket.io');
 
 
 const keys = require('./config/keys');
-const{generateMessage,generateLocationMessage} = require('./utils/message');
+const{generateMessage} = require('./utils/message');
 const {isRealString} = require('./utils/validation');
 const {Users} = require('./utils/users');
 
@@ -31,7 +31,7 @@ io.on('connection', (socket) => {
     console.log('New user connected');
     socket.on('join', (params, callback) => {
         // Once joined we need to store that user has joined the room.
-        socket.join(params.room);
+        socket.join(params.room); // instead of room we will use room id here.
         users.removeUser(socket.id);
         users.addUser(socket.id,params.name,params.room);
 
@@ -42,6 +42,7 @@ io.on('connection', (socket) => {
         callback();
     });
     socket.on('createMessage', (newMessage, callback)=>{
+        console.log(newMessage);
         var user = users.getUser(socket.id)[0];
         if(user && isRealString(newMessage.text)){
             io.to(user.room).emit('newMessage', generateMessage(user.name,newMessage.text));
@@ -49,6 +50,7 @@ io.on('connection', (socket) => {
         callback();
     });
     socket.on('disconnect', () => {
+        console.log('user disconnected');
         var user = users.removeUser(socket.id)[0];
         if(user){
             io.to(user.room).emit('updateUserList',users.getUserList(user.room));

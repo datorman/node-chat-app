@@ -16,7 +16,7 @@ class Rooms extends Component {
     }
     componentDidMount(){
         axios.get(' /api/rooms/list',{}).then((res) => {
-            this.setState({rooms:res.data,isLoading:false});
+            this.setState({isLoading:false});
             this.props.setRoomList(res.data);
         },(err) => {
             this.setState({
